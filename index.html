@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gachapon Kawaii</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      scroll-behavior: smooth;
+      background: linear-gradient(to bottom, #e0bbf9, #c1a1e6);
+      color: #4b0082;
+    }
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 4em;
+      margin: 0.5em 0;
+    }
+    .button {
+      background-color: #d8b4f8;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 2em;
+    }
+    .button:hover {
+      background-color: #c084fc;
+    }
+    .text-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .text-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    img, video {
+      max-width: 90%;
+      height: auto;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+    .choice-buttons button {
+      margin: 20px;
+      font-size: 2em;
+      padding: 20px 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Página 1 -->
+  <section id="page1">
+    <h1>HOLA</h1>
+    <a href="#page2"><button class="button">jeje sigue bajando</button></a>
+  </section>
+
+  <!-- Página 2 -->
+  <section id="page2">
+    <div class="text-reveal">Good boy, obediente como me gusta, ahora continúa bajando</div>
+    <div class="text-reveal">Llevo un tiempo pensando cómo hacer esto, eres alguien muy especial para mí y no pienso darte un trato ordinario, así que tuve que pensar y pensar</div>
+    <div class="text-reveal">Pero no te preocupes mi niño lindo, soy un genio sugoi y por fin pensé en algo que creí que te gustaría y con suerte te haría reír un rato jeje nice</div>
+    <div class="text-reveal">Eto... Oni chan eres alguien sugoi que me hace sentir ureshi cuando estoy contigo y muy kanashi cuando no estás</div>
+    <img src="assets/chico_timido.gif" alt="Chico tímido" />
+    <a href="#page3"><button class="button">continuar?</button></a>
+  </section>
+
+  <!-- Página 3 -->
+  <section id="page3">
+    <div class="text-reveal">Es increíble que puedo ser yo mismo sin limitarme a nada...</div>
+    <div class="text-reveal">Puedo ser serio o puedo ser baka estando contigo</div>
+    <div class="text-reveal">Baaaaaaaaaaaaaaaaaaaka</div>
+    <div class="text-reveal">Me gustas mucho Daikinen, por más que te lo digo no siento que sea suficiente...</div>
+    <div class="text-reveal">Daaaaaaaaaaaaaaai Suki!</div>
+    <div class="text-reveal">Quiero pasar el resto de mis días contigo, sabes?</div>
+    <div class="text-reveal">Por favor sé mi kareshi, prometo que dedicaré todo a hacerte feliz... pero antes sigue bajando, my good boy</div>
+    <a href="#page4"><button class="button">continuar?</button></a>
+  </section>
+
+  <!-- Página 4 - Gachapón -->
+  <section id="page4">
+    <iframe src="assets/gachapon.html" width="100%" height="500px" frameborder="0" style="border-radius: 20px;"></iframe>
+    <a href="#page5"><button class="button">continuar?</button></a>
+  </section>
+
+  <!-- Página 5 -->
+  <section id="page5">
+    <img src="assets/imagen1.jpg" alt="Imagen especial">
+    <div class="choice-buttons">
+      <a href="#page6"><button class="button">Sí</button></a>
+      <a href="#page7"><button class="button">No</button></a>
+    </div>
+  </section>
+
+  <!-- Página 6 - Sí -->
+  <section id="page6">
+    <img src="assets/abrazo.gif" alt="Abrazo">
+    <div class="text-reveal">Ureshiii, ahora no te soltaré nunca:3<br>mwaaah</div>
+  </section>
+
+  <!-- Página 7 - No -->
+  <section id="page7">
+    <img src="assets/plan b.jpg" alt="Plan B">
+    <div class="text-reveal">Oioioioioi cómo que no baka! Te voy a follar, bueno es hora del plan B (brujería y magia oscura)</div>
+  </section>
+
+  <script>
+    // Efecto de scroll para mostrar textos
+    const revealElements = document.querySelectorAll('.text-reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

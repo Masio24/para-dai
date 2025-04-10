@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gachapón</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #f3e8ff;
+      overflow-x: hidden;
+    }
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gachapon-container {
+      position: relative;
+      width: 320px;
+      height: 450px;
+      background: url('assets/gachapon_realista.png') no-repeat center/contain;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin: auto;
+    }
+    .lever {
+      width: 60px;
+      height: 120px;
+      background: #a78bfa;
+      border-radius: 20px;
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .lever::after {
+      content: '';
+      width: 30px;
+      height: 30px;
+      background: #f472b6;
+      border-radius: 50%;
+      margin-bottom: 5px;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 1.5em;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      min-height: 120px;
+      display: none;
+      text-align: center;
+      line-height: 1.8;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .shake {
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0% { transform: rotate(0); }
+      25% { transform: rotate(10deg); }
+      50% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+      100% { transform: rotate(0); }
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .heart {
+      position: absolute;
+      background: pink;
+      clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 85% 25%, 85% 40%, 50% 80%, 15% 40%, 15% 25%, 25% 12%, 39% 12%);
+      opacity: 0.7;
+      animation: floatUp 2s ease-out forwards;
+      z-index: 9999;
+    }
+    @keyframes floatUp {
+      to {
+        transform: translateY(-150px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body onclick="spawnHearts()">
+  <section>
+    <h1 class="fade-in">HOLA</h1>
+    <button onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})">jeje sigue bajando</button>
+  </section>
+
+  <section>
+    <p class="fade-in">Good boy, obediente como me gusta, ahora continúa bajando</p>
+    <p class="fade-in">Llevo un tiempo pensando cómo hacer esto, eres alguien muy especial para mí...</p>
+    <p class="fade-in">Pero no te preocupes mi niño lindo, soy un genio sugoi...</p>
+    <p class="fade-in">Eto... Oni chan eres alguien sugoi que me hace sentir ureshi...</p>
+    <button onclick="window.scrollTo({top: window.innerHeight * 2, behavior: 'smooth'})">continuar?</button>
+  </section>
+
+  <section>
+    <p class="fade-in">Es increíble que puedo ser yo mismo sin limitarme a nada...</p>
+    <p class="fade-in">Puedo ser serio o puedo ser baka estando contigo</p>
+    <p class="fade-in">Baaaaaaaaaaaaaaaaaaaka</p>
+    <p class="fade-in">Me gustas mucho Daikinen...</p>
+    <p class="fade-in">Daaaaaaaaaaaaaaai Suki!</p>
+    <p class="fade-in">Quiero pasar el resto de mis días contigo...</p>
+    <p class="fade-in">Por favor sé mi kareshi...</p>
+    <button onclick="window.scrollTo({top: window.innerHeight * 3, behavior: 'smooth'})">continuar?</button>
+  </section>
+
+  <section>
+    <div class="gachapon-container">
+      <div class="lever" id="lever"></div>
+      <div class="message" id="message"></div>
+    </div>
+  </section>
+
+  <audio id="sound-lever" src="assets/palanca.mp3"></audio>
+  <audio id="sound-ball" src="assets/bolita.mp3"></audio>
+
+  <script>
+    const lever = document.getElementById('lever');
+    const messageBox = document.getElementById('message');
+    const soundLever = document.getElementById('sound-lever');
+    const soundBall = document.getElementById('sound-ball');
+
+    const messages = [
+      "Aishiteru Daikinen,  te voy a amar siempre y te voy a dar muchos cariñitos y amor de muchas maneras (también le daré amor a tu ochinchin)",
+      "Siempre estaré para ayudarte con cualquier cosa que necesites (y sé hacer muchas cosas así que prometo ser útil! uwu nya)",
+      "Quiero algo bonito contigo, no me voy a ir a ningún lado sólo porque cometas errores...", 
+      "Si aceptas ser mi kareshi prometo ahorrar para visitarte irl regularmente...",
+      "Aún sigues leyendo esto? mucho texto, pero si llegaste hasta aquí te ganaste un premio por tomarme tanta importancia, eres el mejor!",
+      "No lo sabes, pero soy una persona a la que le va muy bien en la vida..."
+    ];
+
+    let index = 0;
+
+    lever.addEventListener('click', () => {
+      lever.classList.add('shake');
+      soundLever.play();
+
+      setTimeout(() => {
+        soundBall.play();
+        messageBox.style.display = 'block';
+        messageBox.textContent = messages[index];
+        messageBox.style.animation = 'none';
+        messageBox.offsetHeight;
+        messageBox.style.animation = null;
+        index = (index + 1) % messages.length;
+        lever.classList.remove('shake');
+        spawnHearts();
+      }, 500);
+    });
+
+    function spawnHearts() {
+      const colors = ['#f9a8d4', '#a5b4fc', '#fcd34d', '#6ee7b7', '#fca5a5'];
+      for (let i = 0; i < 6; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        const size = Math.floor(Math.random() * 20) + 10;
+        heart.style.width = size + 'px';
+        heart.style.height = size + 'px';
+        heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = '80%';
+        heart.style.animationDelay = `${Math.random()}s`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+    }
+
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fadeIns.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
