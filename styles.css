@@ -1,0 +1,122 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Chewy', cursive;
+  background: linear-gradient(to bottom, #e8c7ff, #fce4ff);
+  overflow-x: hidden;
+  color: #4b0055;
+}
+
+.page {
+  display: none;
+  padding: 2rem;
+  text-align: center;
+}
+
+.page.active {
+  display: block;
+}
+
+.title {
+  font-size: 4rem;
+  margin-top: 20vh;
+  color: #7a00b8;
+}
+
+.next-button, .choice-buttons button {
+  margin-top: 2rem;
+  background: #d7a9f3;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(123, 0, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.next-button:hover, .choice-buttons button:hover {
+  background: #f4caff;
+  transform: scale(1.05);
+}
+
+.scroll-text p {
+  font-size: 1.5rem;
+  margin: 3rem auto;
+  max-width: 90%;
+  animation: fadeUp 1s ease forwards;
+  opacity: 0;
+}
+
+.scroll-text p:nth-child(1) { animation-delay: 0.2s; }
+.scroll-text p:nth-child(2) { animation-delay: 1s; }
+.scroll-text p:nth-child(3) { animation-delay: 1.8s; }
+.scroll-text p:nth-child(4) { animation-delay: 2.6s; }
+.scroll-text p:nth-child(5) { animation-delay: 3.4s; }
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hearts-container, .sparkles-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gacha-machine {
+  position: relative;
+  margin: 2rem auto;
+  width: 300px;
+}
+
+.gachapon-image {
+  width: 100%;
+}
+
+.lever {
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  background: pink;
+  right: -30px;
+  top: 50px;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255,0,255,0.5);
+}
+
+#gacha-output .gacha-ball {
+  margin: 1rem auto;
+  padding: 1rem;
+  background: #fff0fb;
+  border: 2px dashed #c653d8;
+  border-radius: 2rem;
+  width: 80%;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px rgba(180, 120, 255, 0.4);
+  animation: fadeUp 0.6s ease;
+}
+
+.final-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #a200b3;
+}
+
+.final-image {
+  max-width: 80%;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.final-text {
+  font-size: 1.7rem;
+  margin-top: 1rem;
+  color: #7a00b8;
+  text-shadow: 1px 1px #fff;
+}
