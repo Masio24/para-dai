@@ -106,23 +106,37 @@
         opacity: 0;
       }
     }
+    button {
+      margin-top: 40px;
+      padding: 10px 30px;
+      font-size: 1.2em;
+      background: #c4b5fd;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #a78bfa;
+    }
   </style>
 </head>
 <body onclick="spawnHearts()">
+  <audio id="bg-music" src="assets/musica.mp3" autoplay loop></audio>
   <section>
     <h1 class="fade-in">HOLA</h1>
-    <button onclick="document.querySelector('section:nth-of-type(2)').scrollIntoView({ behavior: 'smooth' })">jeje sigue bajando</button>
+    <button onclick="document.querySelector('#page2').scrollIntoView({ behavior: 'smooth' })">jeje sigue bajando</button>
   </section>
 
-  <section>
+  <section id="page2">
     <p class="fade-in">Good boy, obediente como me gusta, ahora continúa bajando</p>
     <p class="fade-in">Llevo un tiempo pensando cómo hacer esto, eres alguien muy especial para mí...</p>
     <p class="fade-in">Pero no te preocupes mi niño lindo, soy un genio sugoi...</p>
     <p class="fade-in">Eto... Oni chan eres alguien sugoi que me hace sentir ureshi...</p>
-    <button onclick="document.querySelector('section:nth-of-type(3)').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
+    <button onclick="document.querySelector('#page3').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
   </section>
 
-  <section>
+  <section id="page3">
     <p class="fade-in">Es increíble que puedo ser yo mismo sin limitarme a nada...</p>
     <p class="fade-in">Puedo ser serio o puedo ser baka estando contigo</p>
     <p class="fade-in">Baaaaaaaaaaaaaaaaaaaka</p>
@@ -130,14 +144,33 @@
     <p class="fade-in">Daaaaaaaaaaaaaaai Suki!</p>
     <p class="fade-in">Quiero pasar el resto de mis días contigo...</p>
     <p class="fade-in">Por favor sé mi kareshi...</p>
-    <button onclick="document.querySelector('section:nth-of-type(4)').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
+    <button onclick="document.querySelector('#page4').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
   </section>
 
-  <section>
+  <section id="page4">
     <div class="gachapon-container">
       <div class="lever" id="lever"></div>
       <div class="message" id="message"></div>
     </div>
+    <button onclick="document.querySelector('#page5').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
+  </section>
+
+  <section id="page5">
+    <img src="assets/imagen1.jpg" style="max-width: 90%; border-radius: 20px; margin-bottom: 20px;">
+    <div style="display: flex; gap: 20px;">
+      <button onclick="document.querySelector('#page6').scrollIntoView({ behavior: 'smooth' })">Sí</button>
+      <button onclick="document.querySelector('#page7').scrollIntoView({ behavior: 'smooth' })">No</button>
+    </div>
+  </section>
+
+  <section id="page6">
+    <img src="assets/abrazo.gif" style="max-width: 90%; border-radius: 20px;">
+    <p class="fade-in">Ureshiii, ahora no te soltaré nunca:3 mwaaah</p>
+  </section>
+
+  <section id="page7">
+    <img src="assets/plan b.jpg" style="max-width: 90%; border-radius: 20px;">
+    <p class="fade-in">Oioioioioi cómo que no baka! Te voy a follar, bueno es hora del plan B (brujería y magia oscura)</p>
   </section>
 
   <audio id="sound-lever" src="assets/palanca.mp3"></audio>
@@ -148,9 +181,10 @@
     const messageBox = document.getElementById('message');
     const soundLever = document.getElementById('sound-lever');
     const soundBall = document.getElementById('sound-ball');
+    const bgMusic = document.getElementById('bg-music');
 
     const messages = [
-      "Aishiteru Daikinen,  te voy a amar siempre y te voy a dar muchos cariñitos y amor de muchas maneras (también le daré amor a tu ochinchin)",
+      "Aishiteru Daikinen, te voy a amar siempre y te voy a dar muchos cariñitos y amor de muchas maneras (también le daré amor a tu ochinchin)",
       "Siempre estaré para ayudarte con cualquier cosa que necesites (y sé hacer muchas cosas así que prometo ser útil! uwu nya)",
       "Quiero algo bonito contigo, no me voy a ir a ningún lado sólo porque cometas errores...",
       "Si aceptas ser mi kareshi prometo ahorrar para visitarte irl regularmente...",
@@ -163,6 +197,7 @@
     lever.addEventListener('click', () => {
       lever.classList.add('shake');
       soundLever.play();
+      bgMusic.pause();
 
       setTimeout(() => {
         soundBall.play();
