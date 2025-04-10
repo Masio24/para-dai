@@ -90,33 +90,38 @@ body {
   box-shadow: 0 0 10px rgba(255,0,255,0.5);
 }
 
-#gacha-output .gacha-ball {
-  margin: 1rem auto;
+#gacha-output {
+  margin-top: 20px;
+  max-width: 90%;
+  font-size: 1.4rem;
+  color: #fff;
+  background: rgba(255, 192, 255, 0.2);
   padding: 1rem;
-  background: #fff0fb;
-  border: 2px dashed #c653d8;
-  border-radius: 2rem;
-  width: 80%;
-  font-size: 1.2rem;
-  box-shadow: 0 0 10px rgba(180, 120, 255, 0.4);
-  animation: fadeUp 0.6s ease;
-}
-
-.final-title {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #a200b3;
-}
-
-.final-image {
-  max-width: 80%;
   border-radius: 1rem;
-  margin-bottom: 1.5rem;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
-.final-text {
-  font-size: 1.7rem;
-  margin-top: 1rem;
-  color: #7a00b8;
-  text-shadow: 1px 1px #fff;
+.gacha-machine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px; /* Este valor lo bajamos para dar más espacio */
+  position: relative;
+}
+
+.gachapon-image {
+  width: 250px;
+  height: auto;
+}
+
+.lever {
+  width: 40px;
+  height: 60px;
+  background-color: #ff99cc;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  right: -40px;
+  cursor: pointer;
+  animation: bounce 1.5s infinite;
 }
