@@ -1,246 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Gachapón</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background-color: #f3e8ff;
-      overflow-x: hidden;
-    }
-    section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
-    .fade-in {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease-out;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .gachapon-container {
-      position: relative;
-      width: 320px;
-      height: 450px;
-      background: url('assets/gachapon_realista.png') no-repeat center/contain;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      margin: auto;
-    }
-    .lever {
-      width: 60px;
-      height: 120px;
-      background: #a78bfa;
-      border-radius: 20px;
-      position: absolute;
-      right: -40px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-    .lever::after {
-      content: '';
-      width: 30px;
-      height: 30px;
-      background: #f472b6;
-      border-radius: 50%;
-      margin-bottom: 5px;
-    }
-    .message {
-      margin-top: 30px;
-      font-size: 1.5em;
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-      width: 90%;
-      min-height: 120px;
-      display: none;
-      text-align: center;
-      line-height: 1.8;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.8s ease-out forwards;
-    }
-    .shake {
-      animation: shake 0.4s ease;
-    }
-    @keyframes shake {
-      0% { transform: rotate(0); }
-      25% { transform: rotate(10deg); }
-      50% { transform: rotate(-10deg); }
-      75% { transform: rotate(10deg); }
-      100% { transform: rotate(0); }
-    }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .heart {
-      position: absolute;
-      background: pink;
-      clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 85% 25%, 85% 40%, 50% 80%, 15% 40%, 15% 25%, 25% 12%, 39% 12%);
-      opacity: 0.7;
-      animation: floatUp 2s ease-out forwards;
-      z-index: 9999;
-    }
-    @keyframes floatUp {
-      to {
-        transform: translateY(-150px);
-        opacity: 0;
-      }
-    }
-    button {
-      margin-top: 40px;
-      padding: 10px 30px;
-      font-size: 1.2em;
-      background: #c4b5fd;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #a78bfa;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Kareshi</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 </head>
-<body onclick="spawnHearts()">
+<body>
   <audio id="bg-music" src="assets/musica.mp3" autoplay loop></audio>
-  <section>
-    <h1 class="fade-in">HOLA</h1>
-    <button onclick="document.querySelector('#page2').scrollIntoView({ behavior: 'smooth' })">jeje sigue bajando</button>
+  <div class="hearts-container"></div>
+
+  <!-- Página 1 -->
+  <section class="page" id="page1">
+    <h1 class="title">HOLA</h1>
+    <button class="next-button" onclick="goToPage(2)">jeje sigue bajando</button>
   </section>
 
-  <section id="page2">
-    <p class="fade-in">Good boy, obediente como me gusta, ahora continúa bajando</p>
-    <p class="fade-in">Llevo un tiempo pensando cómo hacer esto, eres alguien muy especial para mí...</p>
-    <p class="fade-in">Pero no te preocupes mi niño lindo, soy un genio sugoi...</p>
-    <p class="fade-in">Eto... Oni chan eres alguien sugoi que me hace sentir ureshi...</p>
-    <button onclick="document.querySelector('#page3').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
-  </section>
-
-  <section id="page3">
-    <p class="fade-in">Es increíble que puedo ser yo mismo sin limitarme a nada...</p>
-    <p class="fade-in">Puedo ser serio o puedo ser baka estando contigo</p>
-    <p class="fade-in">Baaaaaaaaaaaaaaaaaaaka</p>
-    <p class="fade-in">Me gustas mucho Daikinen...</p>
-    <p class="fade-in">Daaaaaaaaaaaaaaai Suki!</p>
-    <p class="fade-in">Quiero pasar el resto de mis días contigo...</p>
-    <p class="fade-in">Por favor sé mi kareshi...</p>
-    <button onclick="document.querySelector('#page4').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
-  </section>
-
-  <section id="page4">
-    <div class="gachapon-container">
-      <div class="lever" id="lever"></div>
-      <div class="message" id="message"></div>
+  <!-- Página 2 -->
+  <section class="page scroll-text-page" id="page2">
+    <div class="scroll-text">
+      <p>Good boy, obediente como me gusta, ahora continúa bajando</p>
+      <p>Llevo un tiempo pensando cómo hacer esto, eres alguien muy especial para mí y no pienso darte un trato ordinario, así que tuve que pensar y pensar</p>
+      <p>Pero no te preocupes mi niño lindo, soy un genio sugoi y por fin pensé en algo que creí que te gustaría y con suerte te haría reír un rato jeje nice</p>
+      <p>Eto... Oni chan eres alguien sugoi que me hace sentir ureshi cuando estoy contigo y muy kanashi cuando no estás <img src="assets/timid-anime-boy.gif" class="inline-gif"></p>
     </div>
-    <button onclick="document.querySelector('#page5').scrollIntoView({ behavior: 'smooth' })">continuar?</button>
+    <button class="next-button" onclick="goToPage(3)">continuar?</button>
   </section>
 
-  <section id="page5">
-    <h2 class="fade-in">Aceptarás ser mi kareshi, onii chan?</h2>
-    <img src="assets/imagen1.jpg" style="max-width: 90%; border-radius: 20px; margin-bottom: 20px;">
-    <div style="display: flex; gap: 20px;">
-      <button onclick="document.querySelector('#page6').scrollIntoView({ behavior: 'smooth' })">Sí</button>
-      <button onclick="document.querySelector('#page7').scrollIntoView({ behavior: 'smooth' })">No</button>
+  <!-- Página 3 -->
+  <section class="page scroll-text-page" id="page3">
+    <div class="scroll-text">
+      <p>Es increíble que puedo ser yo mismo sin limitarme a nada y no trates de salir huyendo de mi sigma aura, no cualquiera puede tolerarla y suelo tener que esconderla a menudo con la gente que convivo</p>
+      <p>Puedo ser serio o puedo ser baka estando contigo</p>
+      <p>Baaaaaaaaaaaaaaaaaaaka</p>
+      <p>Me gustas mucho Daikinen, por más que te lo digo no siento que sea suficiente, me gustas mucho mucho y quiero estar contigo</p>
+      <p>Daaaaaaaaaaaaaaai Suki!</p>
+      <p>Quiero pasar el resto de mis días contigo, sabes? Motto motto motto, necesito más de tí</p>
+      <p>Por favor sé mi kareshi, prometo que dedicaré mi cuerpo, alma y toda mi existencia a hacerte el chico más feliz del mundo pero antes de que me des una respuesta,  sigue bajando, my good boy</p>
+    </div>
+    <button class="next-button" onclick="goToPage(4)">continuar?</button>
+  </section>
+
+  <!-- Página 4 (Gachapón) -->
+  <section class="page" id="page4">
+    <div class="gacha-machine">
+      <img src="assets/gachapon.png" alt="Gachapon" class="gachapon-image" />
+      <div class="lever" onclick="pullLever()"></div>
+    </div>
+    <div id="gacha-output"></div>
+    <audio id="gacha-sound" src="assets/gacha-sound.mp3"></audio>
+    <button class="next-button" onclick="goToPage(5)">continuar?</button>
+  </section>
+
+  <!-- Página 5 -->
+  <section class="page" id="page5">
+    <h2>Aceptarás ser mi kareshi, onii chan?</h2>
+    <img src="assets/imagen1.jpg" class="final-image" />
+    <div class="choice-buttons">
+      <button onclick="goToPage(6)">Sí</button>
+      <button onclick="goToPage(7)">No</button>
     </div>
   </section>
 
-  <section id="page6">
-    <img src="assets/abrazo.gif" style="max-width: 90%; border-radius: 20px;">
-    <p class="fade-in">Ureshiii, ahora no te soltaré nunca:3 mwaaah</p>
+  <!-- Página 6 -->
+  <section class="page" id="page6">
+    <img src="assets/abrazo.gif" class="final-image" />
+    <p class="final-text">Ureshiii, ahora no te soltaré nunca:3 mwaaah</p>
   </section>
 
-  <section id="page7">
-    <img src="assets/plan b.jpg" style="max-width: 90%; border-radius: 20px;">
-    <p class="fade-in">Oioioioioi cómo que no baka! Te voy a follar, bueno es hora del plan B (brujería y magia oscura)</p>
+  <!-- Página 7 -->
+  <section class="page" id="page7">
+    <img src="assets/plan b.jpg" class="final-image" />
+    <p class="final-text">Oioioioioi cómo que no baka! Te voy a follar, bueno es hora del plan B (brujería y magia oscura)</p>
   </section>
-
-  <audio id="sound-lever" src="assets/palanca.mp3"></audio>
-  <audio id="sound-ball" src="assets/bolita.mp3"></audio>
 
   <script>
-    const lever = document.getElementById('lever');
-    const messageBox = document.getElementById('message');
-    const soundLever = document.getElementById('sound-lever');
-    const soundBall = document.getElementById('sound-ball');
-    const bgMusic = document.getElementById('bg-music');
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 1;
 
-    const messages = [
+    function goToPage(n) {
+      document.getElementById('bg-music').play();
+      pages.forEach(p => p.style.display = 'none');
+      document.getElementById(`page${n}`).style.display = 'block';
+      currentPage = n;
+      if (n === 4) document.getElementById('bg-music').pause();
+      else document.getElementById('bg-music').play();
+    }
+
+    goToPage(currentPage);
+
+    // Gachapón
+    const gachaOutput = document.getElementById('gacha-output');
+    const gachaSound = document.getElementById('gacha-sound');
+    const gachaTexts = [
       "Aishiteru Daikinen, te voy a amar siempre y te voy a dar muchos cariñitos y amor de muchas maneras (también le daré amor a tu ochinchin)",
       "Siempre estaré para ayudarte con cualquier cosa que necesites (y sé hacer muchas cosas así que prometo ser útil! uwu nya)",
-      "Quiero algo bonito contigo, no me voy a ir a ningún lado sólo porque cometas errores. Al contrario, quiero ayudarte a aprender de tus errores y verte crecer como persona mientras yo hago lo mismo ",
+      "Quiero algo bonito contigo, no me voy a ir a ningún lado sólo porque cometas errores. Al contrario, quiero ayudarte a aprender de tus errores y verte crecer como persona mientras yo hago lo mismo",
       "Si aceptas ser mi kareshi prometo ahorrar cada cierto tiempo para ir a visitarte y pasar tiempo contigo irl de manera regular (y quién sabe, en un futuro no muy lejano podríamos vivir juntos:3)",
       "Aún sigues leyendo esto? mucho texto, pero si llegaste hasta aquí te ganaste un premio por tomarme tanta importancia, eres el mejor!",
       "No lo sabes, pero soy una persona a la que le va muy bien en la vida en general, he logrado muchísimas cosas y siempre que me propongo algo lo cumplo, el hecho de que me quieras sin saber todo eso de mí también me hace feliz, estoy harto de la gente interesada"
-      "Lo dejaremos en eso pq tampoco te quiero tener leyendo todo el día jeje"
     ];
+    let gachaIndex = 0;
 
-    let index = 0;
-
-    lever.addEventListener('click', () => {
-      lever.classList.add('shake');
-      soundLever.play();
-      bgMusic.pause();
-
-      setTimeout(() => {
-        soundBall.play();
-        messageBox.style.display = 'block';
-        messageBox.textContent = messages[index];
-        messageBox.style.animation = 'none';
-        messageBox.offsetHeight;
-        messageBox.style.animation = null;
-        index = (index + 1) % messages.length;
-        lever.classList.remove('shake');
-        spawnHearts();
-      }, 500);
-    });
-
-    function spawnHearts() {
-      const colors = ['#f9a8d4', '#a5b4fc', '#fcd34d', '#6ee7b7', '#fca5a5'];
-      for (let i = 0; i < 6; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        const size = Math.floor(Math.random() * 20) + 10;
-        heart.style.width = size + 'px';
-        heart.style.height = size + 'px';
-        heart.style.background = colors[Math.floor(Math.random() * colors.length)];
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.top = '80%';
-        heart.style.animationDelay = `${Math.random()}s`;
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 2000);
+    function pullLever() {
+      if (gachaIndex < gachaTexts.length) {
+        gachaSound.play();
+        const newBall = document.createElement('div');
+        newBall.className = 'gacha-ball';
+        newBall.innerText = gachaTexts[gachaIndex];
+        gachaOutput.appendChild(newBall);
+        gachaIndex++;
       }
     }
-
-    const fadeIns = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.2 });
-
-    fadeIns.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
